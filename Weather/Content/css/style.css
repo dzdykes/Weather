@@ -1,0 +1,106 @@
+﻿body {
+    background-color:#71aa6e;
+    font-family:Verdana, sans-serif;
+}
+
+#DivWrapper {
+    width:60%;
+    margin:auto;
+}
+
+nav, header, section {
+    width:100%;
+    margin:auto;
+}
+
+article {
+    margin:auto;
+}
+
+nav {
+    text-align:center;
+    font-size:28px;
+}
+
+nav input {
+    font-size:28px;
+}
+
+.left {
+    float:left;
+}
+
+.right {
+    float:right;
+}
+
+#currentTemp {
+    font-size:58px;
+}
+
+nav input[type=button] {
+    padding:5px;
+}
+
+header h1{
+    margin:auto;
+    text-align:center;
+    padding-top:2%;
+}
+
+header h4 {
+    width:100%;
+    margin:auto;
+    text-align:center;
+    padding-top:2%;
+}
+
+section {
+    width:50%;
+    margin:auto;
+}
+
+section img {
+    float:left;
+}
+
+article ul {
+    width:100%;
+    margin:auto;
+    list-style:none;
+    padding-left:0px;
+}
+
+article ul li {
+    list-style:none;
+    display:inline-block;
+    padding: 5px;
+}
+
+.currentCondition {
+    width:100%;
+    margin:auto;
+    text-align:left;
+}
+
+.currentCondition img {
+}
+
+input {
+    cursor:pointer;
+}
+
+input[type=text] {
+    cursor:text;
+}
+
+input[type=button]{
+    display:inline-block;
+    border-radius:4px;
+    padding:3%;
+    margin:1%;
+}
+
+input[type=button]:hover{
+    border:3px solid #0094ff;
+}
