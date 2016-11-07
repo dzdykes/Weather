@@ -3,126 +3,95 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/css/style.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="DivWrapper">
-        <nav>
-            <h3>What's the Weather?</h3>
-            <h5>Search by the name or zipcode of your city</h5>
-            <input id="CityName" type="text" placeholder="Enter City Name or Zip" />
-            <input type="radio" name="temp" value="F" checked /> F
-            <input type="radio" name="temp" value="C" /> C
-            <input type="button" value="Search" onclick="find();" />
-        </nav>
-        <header>
-            <h1 id="Title">
-            </h1>   
-            <h4 id="Date">
-            </h4>
+    <nav class="container-fluid">
+        <div class="row">
+            <input id="CityName" class="text-info col-sm-offset-1 col-sm-5 text-right" type="text" placeholder="Enter City/Zip" />
+            <div class="col-sm-3">
+                <label class="btn btn-primary temp-radio">
+                    <input type="radio" name="temp" id="F" value="F" checked> F
+                </label>
+                <label class="btn btn-primary temp-radio">
+                    <input type="radio" name="temp" id="C" value="C"> C
+                </label>
+            </div>
+            <div class="col-sm-2 text-left">
+                <button class="btn btn-toolbar search-button" onclick="find()">Get Weather</button>
+            </div>
+        </div>
+    </nav>
+    <main class="hidden">
+        <header class="jumbotron text-center">
+            <font id="Title"></font><br />
+            <sub id="Date" class="h2"></sub>
         </header>
-        <section>
-            <article class="currentCondition">
-                <ul>
-                    <li>
-                        <img id="Icon" width="75" height="75" src="" />
-                    </li>
-                    <li>
-                        <span id="currentTemp"></span>
-                    </li>
-                </ul>
-            </article>
-            <hr />
-            <article class="">
-                <ul>
-                    <li>
-                        Hi: <span id="hiTemp"></span> <br />
-                        Lo: <span id="loTemp"></span>
-                    </li>
-                    <li>
-                        Wind: <span id="wind"></span> <br />
-                        Humidity: <span id="humid"></span>
-                    </li>
-                    <li>
-                        Sunrise: <span id="sunrise"></span> <br />
-                        Sunset: <span id="sunset"></span>
-                    </li>
-                </ul>
-            </article>
-            <span id="sunrise"></span>
-        </section>
-    </div>
+        <div class="panel-info">
+            <div class="panel-heading text-center">
+                <img id="Icon" src="" class="img-rounded" />
+                <font id="currentTemp"></font>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <ul class="list-group-item-heading">
+                            <li class="list-group-item">
+                                <div class="left">
+                                    High
+                                </div>
+                                <div id="hiTemp" class="right">
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="left">
+                                    Low
+                                </div>
+                                <div id="loTemp" class="right">
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="left">
+                                    Wind
+                                </div>
+                                <div id="wind" class="right">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul class="list-group-item-heading">
+                            <li class="list-group-item">
+                                <div class="left">
+                                    Humidity
+                                </div>
+                                <div id="humid" class="right">
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="left">
+                                    Sunrise
+                                </div>
+                                <div id="sunrise" class="right">
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="left">
+                                    Sunset
+                                </div>
+                                <div id="sunset" class="right">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-    <script src="scripts/jquery-3.1.1.min.js"></script>
-    <script src="scripts/jquery-ui.min.js"></script>
-    <script src="scripts/city.js"></script>
-    <script>
-        $("section").hide();
-
-        function find() {
-            deg = String.fromCharCode(176)
-
-            var uri = 'http://api.openweathermap.org/data/2.5/weather?q=' + $("#CityName").val() + '&appid=b25cf87ab54ff7e95bcf69f22a40bb89';
-            console.log(uri);
-          $.getJSON(uri)
-              .done(function (data) {
-                  console.log(data);
-                  $("section").show();
-                  $('#Title').text(data.name + ", " + data.sys.country);
-                  $('#sunrise').text(Sunrise(data));
-                  $('#sunset').text(Sunset(data));
-                  $('#currentTemp').text(TempConvert(data.main.temp, $("input[name=temp]:checked").val()) + deg);
-                  $('#hiTemp').text(TempConvert(data.main.temp_max, $("input[name=temp]:checked").val()) + deg);
-                  $('#loTemp').text(TempConvert(data.main.temp_min, $("input[name=temp]:checked").val()) + deg);
-                  $('#Icon').attr("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
-                  $('#humid').text(data.main.humidity + "%");
-                  $('#wind').text( getWindDirection(data.wind.deg) + data.wind.speed + " mph");
-              })
-              .fail(function (jqXHR, textStatus, err) {
-                  console.log("Falied!");
-                $('#weather').text('Error: ' + err);
-              });
-        }
-
-        function TempConvert(kelvin, fc) {
-            if (fc == 'F') {
-                return Math.round(kelvin * 9 / 5 - 459.67);
-            } else {
-                return Math.round(kelvin - 273.15);
-            }
-        }
-
-
-        function Sunrise(data) {
-            var date = new Date(data.sys.sunrise * 1000);
-            return date.getHours() + ":" + date.getMinutes();
-        }
-
-        function Sunset(data) {
-            var date = new Date(data.sys.sunset * 1000);
-            return date.getHours() + ":" + date.getMinutes();
-        }
-
-        function getWindDirection(degrees) {
-            if (degrees >= 330 || degrees < 30) {
-                return 'N ';
-            } else if (degrees >= 30 && degrees < 60) {
-                return 'NE ';
-            } else if (degrees >= 60 && degrees < 105) {
-                return 'E ';
-            } else if (degrees >= 105 && degrees < 150) {
-                return 'SE ';
-            } else if (degrees >= 150 && degrees < 195) {
-                return 'S ';
-            } else if (degrees >= 195 && degrees < 240) {
-                return 'SW ';
-            } else if (degrees >= 240 && degrees < 285) {
-                return 'W ';
-            } else {
-                return 'NW ';
-            }
-        }
-
-    </script>
+        </div>
+    </main>
+    <script src="scripts/jquery-3.1.1.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/js/weather.js"></script>
 </body>
 </html>

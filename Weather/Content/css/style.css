@@ -1,106 +1,40 @@
 ﻿body {
-    background-color:#71aa6e;
-    font-family:Verdana, sans-serif;
-}
-
-#DivWrapper {
-    width:60%;
-    margin:auto;
-}
-
-nav, header, section {
-    width:100%;
-    margin:auto;
-}
-
-article {
-    margin:auto;
+    font-size:42px;
 }
 
 nav {
-    text-align:center;
-    font-size:28px;
+    background-color:#baccaf;
 }
 
-nav input {
-    font-size:28px;
+header {
+    font-size:72px;
 }
-
-.left {
-    float:left;
+.panel-heading {
+    font-size:85px;
 }
-
-.right {
-    float:right;
+img {
+    width:125px;
+    height:125px;
 }
-
-#currentTemp {
-    font-size:58px;
-}
-
-nav input[type=button] {
-    padding:5px;
-}
-
-header h1{
-    margin:auto;
-    text-align:center;
-    padding-top:2%;
-}
-
-header h4 {
+li {
     width:100%;
-    margin:auto;
     text-align:center;
-    padding-top:2%;
 }
-
-section {
-    width:50%;
-    margin:auto;
-}
-
-section img {
-    float:left;
-}
-
-article ul {
-    width:100%;
-    margin:auto;
-    list-style:none;
-    padding-left:0px;
-}
-
-article ul li {
-    list-style:none;
-    display:inline-block;
-    padding: 5px;
-}
-
-.currentCondition {
-    width:100%;
-    margin:auto;
+li .left {
+    display:inline-flex;
     text-align:left;
+    width:49%;
 }
 
-.currentCondition img {
+li .right {
+    display:inline-flex;
+    width:49%;
 }
 
-input {
-    cursor:pointer;
+input{
+    display:inline-flex;
 }
 
-input[type=text] {
-    cursor:text;
-}
-
-input[type=button]{
-    display:inline-block;
-    border-radius:4px;
-    padding:3%;
-    margin:1%;
-}
-
-input[type=button]:hover{
-    border:3px solid #0094ff;
+.search-button, .temp-radio {
+    font-size:26px;
 }
